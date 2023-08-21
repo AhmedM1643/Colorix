@@ -10,23 +10,49 @@
     <title>Colorix</title>
 </head>
 <body data-theme="light">
-    <div class="title">
-        <img class="logo" src="imgs/darklogo.png">
-        <p>Welcome To Colorix</p>
+    <div class="container">
+        <nav>
+            <div id="palettes-container">
+                <button>
+                    <div class="info">
+                        <i class="fa fa-bars"></i>
+                        <p class="palette-name">Home</p>
+                    </div>
+                    <div class="actions">
+                        <i class="fa-solid fa-pen edit"></i>
+                        <i class="fa-solid fa-trash delete"></i>
+                    </div>
+                </button>
+            </div>
+            <button id="new-palette"><i class="fa-solid fa-plus"></i><p>Add a new palette</p></button>
+        </nav>
+        <main>
+            <header>
+                <div class="title">
+                    <img class="logo" src="imgs/darklogo.png">
+                    <p>Colorix</p>
+                </div>
+            </header>
+            <p class="desc">A tool for developers to manage their favorite colors and use it in their projects</p>
+        
+            <div class="form">
+                <input placeholder="Enter the title here.." id="title-input" class="title-inp">
+                <input placeholder="Enter the color here.." id="color-input" class="color-inp">
+                <button id="create-btn" class="create">Create</button>
+            </div>
+        
+            <div class="colors"></div> 
+            <div class="popup-container">
+                <div class="popup">
+                    <p>P</p>
+                    <button id="popup-btn">Ok</button>
+                </div>
+            </div> 
+        </main>
     </div>
-    <p>Here you can choose your colors and modify it</p>
-    <div class="form">
-        <input placeholder="Enter the title here.." id="title-input" class="title-inp">
-        <input placeholder="Enter the color here.." id="color-input" class="color-inp">
-        <button id="create-btn" class="create">Create</button>
-    </div>
-    <div class="colors"></div> 
-    <div class="popup-container">
-        <div class="popup">
-            <p>P</p>
-            <button id="popup-btn">Ok</button>
-        </div>
-    </div> 
+
     <script src="js/script.js"></script>
+    <script src="js/palettes.js"></script>
+    <script src="js/popup.js"></script>
 </body>
 </html>
