@@ -14,44 +14,33 @@ const updateCurrentList = () => {
 setTimeout(() => {
     const allPalettes = document.querySelectorAll(".palette");
 
-    allPalettes.forEach(palette => {
-        // Check the current palette
-        palette.getAttribute("data-palette") == currentList.id ? palette.classList.add("current-palette") : null;
+allPalettes.forEach(palette => {
+    // Check the current palette
+    palette.getAttribute("data-palette") == currentList.id ? palette.classList.add("current-palette") : null;
 
-        palette.addEventListener("click", () => {
-            allPalettes.forEach(palette => {palette.classList.remove("current-palette")})
-            palette.classList.add("current-palette")
+    palette.addEventListener("click", () => {
+        allPalettes.forEach(palette => {palette.classList.remove("current-palette")})
+        palette.classList.add("current-palette")
 
-            const paletteId = palette.getAttribute('data-palette');
-            displayColorsForPalette(paletteId)
-            console.log(`This palette is for ${paletteId}`);
-        })
+        const paletteId = palette.getAttribute('data-palette');
+        displayColorsForPalette(paletteId)
+        console.log(`Switched to palette ${paletteId}`);
     })
+})
 
-    const displayColorsForPalette = (id) => {
-        colorList = JSON.parse(localStorage.getItem(`colorlist-${id}`));
-        currentList.content = colorList;
-        colorsContainer.innerHTML = "";
-        for (let i = 0; i < currentList.content.length; i++) {
-            createColor(currentList.content[i].title, currentList.content[i].color, currentList.content[i].id)
-        }
-        localStorage.setItem(`colorlist-${id}`, JSON.stringify(currentList.content));
-        currentList.id = +id;
-        updateCurrentList();
-    };
 }, 1)
 
-function getColorsForPalette(paletteId) {
-    // This is a placeholder function; you'll replace it with
-    // actual data retrieval logic.
-    // Return an array of colors based on the selected palette.
-    if (paletteId === '1') {
-      return ['#FF5733', '#F44336', '#E91E63'];
-    } else if (paletteId === '2') {
-      return ['#3F51B5', '#2196F3', '#03A9F4'];
+const displayColorsForPalette = (id) => {
+    colorList = JSON.parse(localStorage.getItem(`colorlist-${id}`));
+    currentList.content = colorList;
+    colorsContainer.innerHTML = "";
+    for (let i = 0; i < currentList.content.length; i++) {
+        createColor(currentList.content[i].title, currentList.content[i].color, currentList.content[i].id)
     }
-    // ... other palette colors ...
-  }
+    localStorage.setItem(`colorlist-${id}`, JSON.stringify(currentList.content));
+    currentList.id = +id;
+    updateCurrentList();
+};
 
 const createColor = (_title, _color, _id) => {
     const newColor = document.createElement("div")
@@ -99,12 +88,13 @@ const createColor = (_title, _color, _id) => {
             title.setAttribute("readonly", "readonly");
             color.setAttribute("readonly", "readonly");
             const newColorList = currentList.content.map((obj) => obj.id === _id ? {id:_id, title: title.value, color: color.value} : obj);
-            localStorage.setItem(`colorlist-${currentList.id}`, JSON.stringify(currentList.content));
-            localStorage.setItem("current-colorlist", JSON.stringify(newColorList));
+            localStorage.setItem(`colorlist-${currentList.id}`, JSON.stringify(newColorList));
+            localStorage.setItem("current-colorlist", JSON.stringify({id: currentList.id, content: newColorList}));
             editBtn.textContent = "E";
             editBtn.title = "Edit";
         }
     })
+
     deleteBtn.addEventListener("click", () => {
         newColor.remove()
         currentList.content.splice(_id, 1)
@@ -113,13 +103,13 @@ const createColor = (_title, _color, _id) => {
     })
 }
 
-const addColor = () => {
+const addColorToList = () => {
+    // Validations
     if (titleInput.value === "" || colorInput.value === "") { showMsg("Please fill the two fields"); return };
     if (!regex.test(colorInput.value) || colorInput.value.length != 7) { showMsg("We only support 6 digits hex colors, please check your value and try again"); return };
-    const newColor = {title: titleInput.value, color: colorInput.value, id: colorList.length}
-    console.log(colorList)
+
+    const newColor = {title: titleInput.value, color: colorInput.value, id: currentList.content.length}
     currentList.content.push(newColor)
-    console.log(colorList)
     localStorage.setItem(`colorlist-${currentList.id}`, JSON.stringify(currentList.content));
     localStorage.setItem("current-colorlist", JSON.stringify({id: currentList.id, content: colorList}));
 
@@ -129,8 +119,10 @@ const addColor = () => {
 }
 
 
-createBtn.addEventListener("click", () => { addColor() })
+createBtn.addEventListener("click", () => { addColorToList() })
 
 for (let i = 0; i < currentList.content.length; i++) {
     createColor(currentList.content[i].title, currentList.content[i].color, currentList.content[i].id);
 }
+
+updateCurrentList();

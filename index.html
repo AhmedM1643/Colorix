@@ -5,54 +5,58 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/all.min.css">
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/colors.css">
+    <link rel="stylesheet" href="css/main.css">
     <link rel="icon" type="image/x" href="imgs/darklogo.png">
     <title>Colorix</title>
 </head>
 <body data-theme="light">
-    <div class="container">
+    <!-- Root -->
+    <div id="root">
+        <!-- Nav -->
         <nav>
             <div id="palettes-container">
-                <button>
+                <button id="menu-btn">
                     <div class="info">
                         <i class="fa fa-bars"></i>
-                        <p class="palette-name">Home</p>
-                    </div>
-                    <div class="actions">
-                        <i class="fa-solid fa-pen edit"></i>
-                        <i class="fa-solid fa-trash delete"></i>
+                        <p class="palette-name">Colorix</p>
                     </div>
                 </button>
             </div>
-            <button id="new-palette"><i class="fa-solid fa-plus"></i><p>Add a new palette</p></button>
+            <button id="new-palette" class="new-list"><i class="fa-solid fa-plus"></i><p>Add a new palette</p></button>
         </nav>
+        <!-- Main -->
         <main>
+            <!-- Header -->
             <header>
-                <div class="title">
-                    <img class="logo" src="imgs/darklogo.png">
-                    <p>Colorix</p>
-                </div>
+                <img class="logo" src="imgs/darklogo.png">
+                <p class="title">Colorix</p>
             </header>
-            <p class="desc">A tool for developers to manage their favorite colors and use it in their projects</p>
-        
-            <div class="form">
-                <input placeholder="Enter the title here.." id="title-input" class="title-inp">
-                <input placeholder="Enter the color here.." id="color-input" class="color-inp">
-                <button id="create-btn" class="create">Create</button>
-            </div>
-        
-            <div class="colors"></div> 
-            <div class="popup-container">
-                <div class="popup">
-                    <p>P</p>
-                    <button id="popup-btn">Ok</button>
+            <!-- Content -->
+            <div class="content">        
+                <div class="form">
+                    <input placeholder="Enter the title here.." id="title-input" class="title-inp">
+                    <input placeholder="Enter the color here.." id="color-input" class="color-inp">
+                    <button id="create-btn" class="new-btn">Create Color</button>
                 </div>
-            </div> 
+            
+                <div class="colors"></div> 
+                <div class="popup-container">
+                    <div class="popup">
+                        <p>P</p>
+                        <button id="popup-btn">Ok</button>
+                    </div>
+                </div> 
+            </div>
+            <!-- End Content -->
         </main>
+        <!-- End Main -->
     </div>
+    <!-- End Root -->
 
     <script src="js/script.js"></script>
     <script src="js/palettes.js"></script>
+    <script src="js/menu.js"></script>
     <script src="js/popup.js"></script>
 </body>
 </html>

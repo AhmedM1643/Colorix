@@ -50,6 +50,13 @@ const createPalette = (name, id) => {
     deleteBtn.addEventListener("click", () => {
         newPalette.remove();
         palettes.splice(id, 1);
+        if (id === currentList.id) {
+            currentList.id = 0;
+            colorList = JSON.parse(localStorage.getItem("colorlist-0"));
+            currentList.content = colorList;
+            displayColorsForPalette("0")
+            localStorage.setItem("current-colorlist", JSON.stringify(currentList));
+        }
         localStorage.removeItem(`colorlist-${id}`)
         localStorage.setItem("palettes", JSON.stringify(palettes));
     })
@@ -71,9 +78,9 @@ newPaletteBtn.addEventListener("click", () => {
         name: "New Palette",
         id: palettes.length
     }
+    // const currentList = JSON.parse(localStorage.getItem("current-colorlist"));
 
     document.querySelectorAll(".palette").forEach(_palette => { _palette.getAttribute("data-palette") == currentList.id ? _palette.classList.add("current-palette") : null; })
-    
     palettes.push(palette);
     localStorage.setItem("palettes", JSON.stringify(palettes));
     createPalette(palette.name, palette.id)

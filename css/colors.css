@@ -1,0 +1,143 @@
+@import "main.css";
+
+/* Content */
+.content {
+    width: 1400px;
+    margin: 0 auto;
+}
+
+/* Form */
+.form {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 20px auto;
+}
+
+.form input, .new-btn {
+    width: 100%;
+    height: 2rem;
+    padding: 4px;
+    background-color: transparent;
+    color: var(--dark);
+    border: 1px solid var(--scroll);
+    outline: none;
+}
+
+.form input {
+    padding-left: 8px;
+}
+
+.form input:nth-child(2) { border-bottom: none; border-top: none; }
+.new-btn { 
+    cursor: pointer;
+    background-color: var(--light-gray-1);
+ }
+ .new-btn:hover { background-color: var(--light-gray-2); }
+
+/* End Form */
+
+/* Colors */
+.colors {
+    width: 100%;
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+@media (max-width: 768px) and (min-width: 381px) { .colors {  grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 380px) { .colors {  grid-template-columns: 1fr; } }
+@media (max-width: 1170px) and (min-width: 769px) { .colors { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 1782px) { .content { width: 90%; } }
+
+.preview {
+    width: 100%;
+    height: 100px;
+    display: flex;
+    align-items: end;
+    flex-direction: column;
+    border: 1px solid #bbbbbb;
+    border-bottom: none;
+    padding: 10px;
+    gap: 2px;
+}
+
+.preview button {
+    padding: 2px;
+    width: 20px;
+    cursor: pointer;
+}
+
+.color .info {
+    display: flex;
+    justify-content: space-between;
+    border: 1px solid #bbbbbb;
+    padding: 10px;
+    gap: 10px;
+}
+
+.color input {
+    width: 50%;
+    padding: 0;
+    border: 1px solid var(--dark);
+}
+
+.color input[readonly] {
+    background-color: transparent;
+    border: 1px solid var(--light);
+    color: var(--dark);
+}
+
+.color-hex {
+    text-align: end;
+}
+
+/* End Colors */
+
+
+
+
+
+
+
+
+
+.popup-container {
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: rgba(255, 97, 88, 0.2);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    display: none;
+}
+
+.popup {
+    background-color: var(--secondary);
+    color: var(--dark);
+    padding: 20px;
+    width: 50%;
+    height: 40%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.popup button {
+    padding: 10px;
+    width: 20%;
+    margin-top: 32px;
+    cursor: pointer;
+}
+
